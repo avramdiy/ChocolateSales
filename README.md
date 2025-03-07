@@ -35,3 +35,13 @@
 - Rename all occurrences of "70% Dark Bites" to Dark Choc.
 
 - All data is ready for analysis.
+
+### 3rd Commit
+
+- I want to visualize a pie chart showing the combined amount sold of all types of choc, for all countries.
+
+- Create pie_chart.html
+
+- Convert "Amount" values into integers from string.
+
+- After visualizing, I can see Dark, Milk, Liquid, Mint, Almond Choc are the top 5 sold, in their respective order.
