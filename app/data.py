@@ -188,5 +188,49 @@ def bar_chart():
     # Return the bar chart image as a response
     return Response(img_io, mimetype='image/png')
 
+@app.route('/line-plot')
+def line_plot():
+    data = load_data()
+
+    if isinstance(data, str):  # If an error occurred
+        return data
+
+    # Ensure "Amount", "Country", and "Date" columns exist
+    if "Amount" not in data.columns or "Country" not in data.columns or "Date" not in data.columns:
+        return "Error: 'Amount', 'Country', or 'Date' column not found in the dataset."
+    
+    # Clean the "Amount" column by removing non-numeric characters (like $ and commas)
+    data["Amount"] = data["Amount"].replace({r'[^\d.]': ''}, regex=True)
+
+    # Convert "Amount" to numeric values (this will convert any invalid values to NaN)
+    data["Amount"] = pd.to_numeric(data["Amount"], errors='coerce')
+
+    # Convert the "Date" column to datetime
+    data["Date"] = pd.to_datetime(data["Date"], errors='coerce')
+
+    # Extract the Year-Month from the "Date" column
+    data["Year-Month"] = data["Date"].dt.to_period('M')
+
+    # Group by "Country" and "Year-Month" and sum the "Amount"
+    monthly_sales = data.groupby(["Country", "Year-Month"])["Amount"].sum().unstack(fill_value=0)
+
+    # Plotting the line plot with "Year-Month" on the X-axis
+    fig, ax = plt.subplots(figsize=(10, 6))
+    monthly_sales.T.plot(kind='line', ax=ax, marker='o')  # Transpose the DataFrame to get months on X-axis
+
+    ax.set_xlabel('Month')
+    ax.set_ylabel('Total Amount Sold')
+    ax.set_title('Total Monthly Sales by Country')
+    ax.legend(title='Country')
+
+    # Save the plot to a BytesIO object (in-memory image)
+    img_io = io.BytesIO()
+    plt.savefig(img_io, format='png')
+    img_io.seek(0)
+    plt.close()
+
+    # Return the line plot image as a response
+    return Response(img_io, mimetype='image/png')
+
 if __name__ == '__main__':
     app.run(debug=True)

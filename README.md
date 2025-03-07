@@ -52,6 +52,22 @@
 
 - I want to visualize a bar chart for USA under the "Country" column. I want all choc types on the X axis, and the total Amount sold per type, on the Y axis.
 
-- Created ('/usa-bar-chart') route
+- Created ('/usa-bar-chart') route.
 
-- Created bar_chart.html
+- Created bar_chart.html.
+
+### 5th Commit
+
+- I want to visualize a line plot. I want to aggregate the total monthy amount sold by country. I want the Y axis to be the "Amount", and the X axis will represent the months. I want each line a different color to represent each country in the dataset, with a legend for viewers.
+
+- Created line_plot.html.
+
+- Created ('/line-plot') route.
+
+- I can see that the UK has times where chocolate cravings peak in Jan and June.
+
+- I can also tell that Canada has a pretty low average consumption of chocolate.
+
+- A further analysis could give us the moving average of the best chocolates to sell in which months, or which countries prefer which chocolates at certain times.
+
+- Nice project. On to Week 15 then.
