@@ -45,3 +45,13 @@
 - Convert "Amount" values into integers from string.
 
 - After visualizing, I can see Dark, Milk, Liquid, Mint, Almond Choc are the top 5 sold, in their respective order.
+
+- Also fixed "Choc Chip" to be "Chip Choc" for analysis.
+
+### 4th Commit
+
+- I want to visualize a bar chart for USA under the "Country" column. I want all choc types on the X axis, and the total Amount sold per type, on the Y axis.
+
+- Created ('/usa-bar-chart') route
+
+- Created bar_chart.html
